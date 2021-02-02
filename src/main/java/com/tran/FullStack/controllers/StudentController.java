@@ -1,6 +1,8 @@
 package com.tran.FullStack.controllers;
 
 import com.tran.FullStack.models.Student;
+import com.tran.FullStack.services.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,19 +14,15 @@ import java.util.UUID;
 @RequestMapping(path="students")
 public class StudentController {
 
+    private final StudentService studentService;
+
+    @Autowired
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
     @GetMapping
     public List<Student> getStudents() {
-        return List.of(
-                new Student(UUID.randomUUID(),
-                        "James",
-                        "Bond",
-                        "jamesbond@gmail.com",
-                        Student.Gender.MALE),
-                new Student(UUID.randomUUID(),
-                        "Elisa",
-                        "Tamara",
-                        "elisatamara@gmail.com",
-                        Student.Gender.FEMALE)
-        );
+        return studentService.getAllStudents();
     }
 }
