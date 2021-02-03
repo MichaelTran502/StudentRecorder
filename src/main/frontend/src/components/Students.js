@@ -49,8 +49,7 @@ const Students = ({students}) => {
       rowKey='studentId'
       pagination={false}
       style = {{width: '1400px', margin: '0 auto'}}
-      />;
-    
+      />
     </div>
   )
 }

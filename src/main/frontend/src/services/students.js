@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = '/students';
+const url = '/api/students';
 
 const getAllStudents = () => {
   const request = axios.get(url);
