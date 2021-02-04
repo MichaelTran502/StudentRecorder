@@ -23,21 +23,31 @@ const App = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
+  
+  const rerender = () => {
+    getAllStudents()
+      .then(res => res.json())
+      .then(students => {
+        console.log(students);
+        setStudents(students);
+      })
+  }
   useEffect(() => {
     getAllStudents()
       .then(res => res.json())
       .then(students => {
+        console.log(students);
         setStudents(students);
       })
-  }, [students]);
+  }, []);
+
 
   return (
     <div className="App">
       <h1>React App</h1>
       <Students students={students}/>
       <Modal title="Add New Student" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <AddStudentForm />
+        <AddStudentForm onSuccess={() => {handleCancel(); rerender();}}/>
       </Modal>
       <Footer numberOfStudents={students.length} showModal={showModal}/>
     </div>

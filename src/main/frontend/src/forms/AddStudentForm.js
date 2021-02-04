@@ -6,7 +6,7 @@ import { addNewStudent } from '../services/students';
 const inputBottomMargin = { marginBottom: '10px'};
 const tagStyle = { backgroundColor: '#f50', color: 'white', ...inputBottomMargin};
 
-const AddStudentForm = () => {
+const AddStudentForm = ({onSuccess}) => {
   return (
     <div>
      <Formik
@@ -40,6 +40,7 @@ const AddStudentForm = () => {
          addNewStudent(student).then((res) => {
           console.log(JSON.stringify(student));
           setSubmitting(false);
+          onSuccess();
          })
        }}
      >
