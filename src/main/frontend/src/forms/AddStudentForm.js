@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik } from 'formik';
 import { Input, Button, Tag } from 'antd';
+import { addNewStudent } from '../services/students';
 
 const inputBottomMargin = { marginBottom: '10px'};
 const tagStyle = { backgroundColor: '#f50', color: 'white', ...inputBottomMargin};
@@ -35,11 +36,11 @@ const AddStudentForm = () => {
 
          return errors;
        }}
-       onSubmit={(values, { setSubmitting }) => {
-         setTimeout(() => {
-           alert(JSON.stringify(values, null, 2));
-           setSubmitting(false);
-         }, 400);
+       onSubmit={(student, { setSubmitting }) => {
+         addNewStudent(student).then((res) => {
+          console.log(JSON.stringify(student));
+          setSubmitting(false);
+         })
        }}
      >
        {({
@@ -50,6 +51,8 @@ const AddStudentForm = () => {
          handleBlur,
          handleSubmit,
          isSubmitting,
+         submitForm,
+         isValid
          /* and other goodies */
        }) => (
          <form onSubmit={handleSubmit}>
@@ -93,7 +96,10 @@ const AddStudentForm = () => {
            />
            {errors.gender && touched.gender && <Tag style={tagStyle}>{errors.gender}</Tag>}
 
-           <Button type="submit" disabled={isSubmitting}>
+           <Button
+            onClick={() => submitForm()} 
+            type="submit" 
+            disabled={isSubmitting | (touched && !isValid)}>
              Submit
            </Button>
          </form>

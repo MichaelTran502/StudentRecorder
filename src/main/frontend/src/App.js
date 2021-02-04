@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import studentService from './services/students';
+import { getAllStudents } from './services/students';
 import Students from './components/Students'
 import Footer from './components/Footer';
 import { Modal } from 'antd';
@@ -25,12 +25,12 @@ const App = () => {
   };
 
   useEffect(() => {
-    studentService.getAllStudents()
-      .then(returnedStudents => {
-        console.log(returnedStudents)
-        setStudents(returnedStudents);
+    getAllStudents()
+      .then(res => res.json())
+      .then(students => {
+        setStudents(students);
       })
-  }, [])
+  }, [students]);
 
   return (
     <div className="App">

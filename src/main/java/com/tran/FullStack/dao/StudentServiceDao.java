@@ -52,4 +52,24 @@ public class StudentServiceDao {
             );
         };
     }
+
+    public int insertNewStudent(UUID studentId, Student student) {
+        String sql = "" +
+                "INSERT INTO STUDENT (" +
+                "student_id, " +
+                "first_name, " +
+                "last_name, " +
+                "email, " +
+                "gender) " +
+                "VALUES (?, ?, ?, ?, ?)";
+
+        return jdbcTemplate.update(
+                sql,
+                studentId,
+                student.getFirstName(),
+                student.getLastName(),
+                student.getEmail(),
+                student.getGender().name().toUpperCase()
+        );
+    }
 }
