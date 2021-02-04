@@ -1,10 +1,32 @@
-import axios from 'axios';
+import fetch from 'unfetch';
 
 const url = '/api/students';
 
-const getAllStudents = () => {
-  const request = axios.get(url);
-  return request.then(response => response.data);
+/*
+const checkStatus = response => {
+  if (response.ok) {
+      return response;
+  } else {
+      let error = new Error(response.statusText);
+      error.response = response;
+      response.json().then(e => {
+          error.error = e;
+      });
+      return Promise.reject(error);
+  }
+}
+*/
+export const getAllStudents = () => {
+  return fetch(url);
+  
 }
 
-export default { getAllStudents }
+export const addNewStudent = (student) => {
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(student)
+  });
+}
