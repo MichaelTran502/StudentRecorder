@@ -28,9 +28,10 @@ const App = () => {
     getAllStudents()
       .then(res => res.json())
       .then(students => {
+        console.log("RUNNING USEEFFECT");
         setStudents(students);
       })
-  }, [students]);
+  }, [isModalVisible]);
 
   return (
     <div className="App">
