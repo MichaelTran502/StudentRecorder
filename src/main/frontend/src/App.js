@@ -36,18 +36,11 @@ const App = () => {
     getAllStudents()
       .then(res => res.json())
       .then(students => {
-<<<<<<< HEAD
-        console.log("RUNNING USEEFFECT");
-        setStudents(students);
-      })
-  }, [isModalVisible]);
-=======
         console.log(students);
         setStudents(students);
       })
   }, []);
 
->>>>>>> react-frontend
 
   return (
     <div className="App">
