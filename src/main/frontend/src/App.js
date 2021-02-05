@@ -5,6 +5,7 @@ import Students from './components/Students'
 import Footer from './components/Footer';
 import { Modal } from 'antd';
 import AddStudentForm from './forms/AddStudentForm';
+import { errorNotification } from './components/Notification';
 
 const App = () => {
 
@@ -31,6 +32,11 @@ const App = () => {
         console.log(students);
         setStudents(students);
       })
+      .catch(error => {
+        const message = error.error.message;
+        const description = error.error.error;
+        errorNotification(message, description);
+      })
   }
   useEffect(() => {
     getAllStudents()
@@ -38,6 +44,11 @@ const App = () => {
       .then(students => {
         console.log(students);
         setStudents(students);
+      })
+      .catch(error => {
+        const message = error.error.message;
+        const description = error.error.error;
+        errorNotification(message, description);
       })
   }, []);
 

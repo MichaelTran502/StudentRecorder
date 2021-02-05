@@ -2,7 +2,7 @@ import fetch from 'unfetch';
 
 const url = '/api/students';
 
-/*
+
 const checkStatus = response => {
   if (response.ok) {
       return response;
@@ -15,9 +15,9 @@ const checkStatus = response => {
       return Promise.reject(error);
   }
 }
-*/
+
 export const getAllStudents = () => {
-  return fetch(url);
+  return fetch(url).then(checkStatus);
   
 }
 
@@ -28,5 +28,6 @@ export const addNewStudent = (student) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(student)
-  });
+  })
+  .then(checkStatus);
 }
