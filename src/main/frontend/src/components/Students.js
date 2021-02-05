@@ -1,7 +1,7 @@
-import React from 'react';
-import { Table, Avatar } from 'antd';
+import React, { Fragment } from 'react';
+import { Table, Avatar, Popconfirm, Button } from 'antd';
 
-const Students = ({students}) => {
+const Students = ({students, deleteStudent}) => {
 
   const columns = [
     {
@@ -37,6 +37,25 @@ const Students = ({students}) => {
       title: 'Gender',
       dataIndex: 'gender',
       key: 'gender',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (text, record) => (
+        <Fragment>
+          <Popconfirm
+            placement='topRight'
+            title={`Are you sure you want to delete ${record.studentId}`}
+            okText="Yes"
+            cancelText="No"
+            onConfirm={() => deleteStudent(record.studentId)}
+            onCancel={e => e.stopPropagation()}
+          >
+            <Button type='danger' onClick={(e) => e.stopPropagation()}>Delete</Button>
+          </Popconfirm>
+          <Button style={{marginLeft: '5px'}} type='primary'>Edit</Button>
+        </Fragment>
+      )
     }
   ];
   

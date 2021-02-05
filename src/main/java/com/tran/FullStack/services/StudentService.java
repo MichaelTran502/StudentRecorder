@@ -40,4 +40,8 @@ public class StudentService {
 
         studentServiceDao.insertNewStudent(newStudentId, student);
     }
+
+    public void deleteStudent(UUID studentId) {
+        studentServiceDao.deleteStudentById(studentId);
+    }
 }

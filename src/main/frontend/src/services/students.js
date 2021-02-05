@@ -31,3 +31,10 @@ export const addNewStudent = (student) => {
   })
   .then(checkStatus);
 }
+
+export const deleteStudentFromServer = (studentId) => {
+  return fetch(`api/students/${studentId}`, {
+    method: 'DELETE'
+  })
+  .then(checkStatus);
+}

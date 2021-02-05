@@ -72,4 +72,12 @@ public class StudentServiceDao {
                 student.getGender().name().toUpperCase()
         );
     }
+
+    public int deleteStudentById(UUID studentId) {
+        String sql = "" +
+                "DELETE from student " +
+                "where student_id = ?";
+
+        return jdbcTemplate.update(sql, studentId);
+    }
 }

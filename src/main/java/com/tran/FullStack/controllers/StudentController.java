@@ -30,4 +30,9 @@ public class StudentController {
     public void addNewStudent(@RequestBody @Valid Student student) {
         studentService.addNewStudent(student);
     }
+
+    @DeleteMapping("{studentId}")
+    public void deleteStudent(@PathVariable("studentId") UUID studentId) {
+        studentService.deleteStudent(studentId);
+    }
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { getAllStudents } from './services/students';
+import { getAllStudents, deleteStudentFromServer } from './services/students';
 import Students from './components/Students'
 import Footer from './components/Footer';
 import { Modal } from 'antd';
@@ -52,11 +52,22 @@ const App = () => {
       })
   }, []);
 
+  const deleteStudent = (studentId) => {
+    deleteStudentFromServer(studentId)
+      .then(() => {
+        console.log("deleted a student");
+        rerender();
+      })
+      .catch(error => {
+        console.log(error);
+      })
+
+  }
 
   return (
     <div className="App">
       <h1>React App</h1>
-      <Students students={students}/>
+      <Students students={students} deleteStudent={deleteStudent}/>
       <Modal title="Add New Student" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <AddStudentForm onSuccess={() => {handleCancel(); rerender();}}/>
       </Modal>
