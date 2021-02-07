@@ -2,6 +2,7 @@ package com.tran.FullStack.dao;
 
 import com.tran.FullStack.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -79,5 +80,55 @@ public class StudentServiceDao {
                 "where student_id = ?";
 
         return jdbcTemplate.update(sql, studentId);
+    }
+
+    public boolean selectExistsEmail(String email) {
+        String sql = "" +
+                "SELECT COUNT(*) FROM " +
+                "student " +
+                "WHERE email = ?";
+
+        int count = 0;
+
+        try {
+            count = jdbcTemplate.queryForObject(
+                    sql,
+                    Integer.class,
+                    email
+            );
+        } catch(DataAccessException e) {
+            System.out.println(e);
+        }
+        boolean exists = count > 0;
+
+        return exists;
+    }
+
+    public int updateEmail(UUID studentId, String email) {
+        String sql = "" +
+                "UPDATE student " +
+                "SET email = ? " +
+                "WHERE student_id = ?";
+
+        return jdbcTemplate.update(sql, email, studentId);
+
+    }
+
+    public int updateFirstName(UUID studentId, String firstName) {
+        String sql = "" +
+                "UPDATE student " +
+                "SET first_name = ? " +
+                "WHERE student_id = ?";
+
+        return jdbcTemplate.update(sql, firstName, studentId);
+    }
+
+    public int updateLastName(UUID studentId, String lastName) {
+        String sql = "" +
+                "UPDATE student " +
+                "SET last_name = ? " +
+                "WHERE student_id = ?";
+
+        return jdbcTemplate.update(sql, lastName, studentId);
     }
 }

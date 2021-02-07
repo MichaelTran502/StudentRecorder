@@ -44,4 +44,32 @@ public class StudentService {
     public void deleteStudent(UUID studentId) {
         studentServiceDao.deleteStudentById(studentId);
     }
+
+    public void updateStudent(UUID studentId, Student student) {
+
+        // check valid email
+        Optional.ofNullable(student.getEmail())
+                .ifPresent(email -> {
+                    boolean taken = studentServiceDao.selectExistsEmail(email);
+
+                    if (!taken) {
+                        studentServiceDao.updateEmail(studentId, email);
+                    } else {
+                        throw new IllegalStateException("Email already in use: " + student.getEmail());
+                    }
+                });
+
+        // check valid fist name
+        Optional.ofNullable(student.getFirstName())
+                .ifPresent(firstName -> {
+                    studentServiceDao.updateFirstName(studentId, firstName);
+                });
+        // check valid last name
+        Optional.ofNullable(student.getLastName())
+                .ifPresent(lastName -> {
+                    studentServiceDao.updateLastName(studentId, lastName);
+                });
+
+
+    }
 }
