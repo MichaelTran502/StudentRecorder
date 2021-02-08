@@ -4,7 +4,7 @@ import './Footer.css';
 
 const Footer = ({ numberOfStudents, showModal }) => {
   return (
-    <div className='footer' style = {{width: '1400px', margin: '0 auto'}}>
+    <div className='footer'>
       {numberOfStudents ? 
         <Avatar
         style={{backgroundColor: '#f56a00', marginRight: '5px'}}

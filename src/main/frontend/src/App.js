@@ -101,7 +101,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>React App</h1>
+      <h1>Student Records</h1>
       <Students students={students} deleteStudent={deleteStudent} editStudent={editStudent}/>
       <Modal title="Add New Student" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <AddStudentForm onSuccess={() => {handleCancel(); rerender();}}/>
