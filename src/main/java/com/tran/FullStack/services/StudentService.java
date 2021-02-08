@@ -50,7 +50,7 @@ public class StudentService {
         // check valid email
         Optional.ofNullable(student.getEmail())
                 .ifPresent(email -> {
-                    boolean taken = studentServiceDao.selectExistsEmail(email);
+                    boolean taken = studentServiceDao.selectExistsEmail(email, studentId);
 
                     if (!taken) {
                         studentServiceDao.updateEmail(studentId, email);

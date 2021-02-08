@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Table, Avatar, Popconfirm, Button } from 'antd';
 
-const Students = ({students, deleteStudent}) => {
+const Students = ({students, deleteStudent, editStudent}) => {
 
   const columns = [
     {
@@ -53,7 +53,7 @@ const Students = ({students, deleteStudent}) => {
           >
             <Button type='danger' onClick={(e) => e.stopPropagation()}>Delete</Button>
           </Popconfirm>
-          <Button style={{marginLeft: '5px'}} type='primary'>Edit</Button>
+          <Button style={{marginLeft: '5px'}} type='primary' onClick={() => editStudent(record)}>Edit</Button>
         </Fragment>
       )
     }

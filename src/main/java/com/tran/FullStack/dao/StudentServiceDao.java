@@ -82,11 +82,12 @@ public class StudentServiceDao {
         return jdbcTemplate.update(sql, studentId);
     }
 
-    public boolean selectExistsEmail(String email) {
+    public boolean selectExistsEmail(String email, UUID studentId) {
         String sql = "" +
                 "SELECT COUNT(*) FROM " +
                 "student " +
-                "WHERE email = ?";
+                "WHERE student_id <> ? " +
+                "AND email = ?";
 
         int count = 0;
 
@@ -94,6 +95,7 @@ public class StudentServiceDao {
             count = jdbcTemplate.queryForObject(
                     sql,
                     Integer.class,
+                    studentId,
                     email
             );
         } catch(DataAccessException e) {

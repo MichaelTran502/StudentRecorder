@@ -38,3 +38,14 @@ export const deleteStudentFromServer = (studentId) => {
   })
   .then(checkStatus);
 }
+
+export const updateStudent = (studentId, student) => {
+  return fetch(`api/students/${studentId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(student)
+  })
+  .then(checkStatus);
+}
